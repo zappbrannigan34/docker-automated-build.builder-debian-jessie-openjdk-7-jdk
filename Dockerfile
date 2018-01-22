@@ -14,13 +14,13 @@ MAINTAINER Alexey Kuznetsov <kuznetsovalexey34@gmail.com>
 
 RUN echo "root:root" | chpasswd
 
-# Install a basic SSH server
+#Install a basic SSH server
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir -p /var/run/sshd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# SSH login fix. Otherwise user is kicked off after login
+#SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 #install ant
@@ -35,7 +35,7 @@ RUN apt-get autoclean
 RUN apt-get autoremove
 
 
-# Standard SSH port
+#Standard SSH port
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 
