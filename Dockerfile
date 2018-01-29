@@ -25,6 +25,12 @@ RUN apt-get install -y ant
 
 RUN apt-get install -y vim
 
+#install java libs
+
+RUN apt-get install -y junit
+RUN apt-get install -y libmail-java
+RUN mkdir -p /opt/junit && ln -s /usr/share/java/junit.jar /opt/junit/junit.jar && mkdir -p /opt/javamail && ln -s /usr/share/java/javax.mail.jar /opt/javamail/mail.jar
+
 #Cleaning
 
 RUN apt-get clean
@@ -37,6 +43,3 @@ RUN apt-get autoremove
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 
-RUN apt-get install -y junit
-RUN apt-get install -y libmail-java
-RUN mkdir -p /opt/junit && ln -s /usr/share/java/junit.jar /opt/junit/junit.jar && mkdir -p /opt/javamail && ln -s /usr/share/java/javax.mail.jar /opt/javamail/mail.jar
